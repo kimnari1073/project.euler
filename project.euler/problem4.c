@@ -12,14 +12,37 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 */
 
 #include <stdio.h>
-
+//세 자리 수를 곱해 만들 수 있는 수는 다섯 자리 수 ~ 여섯 자리 수이다.
 int main() {
-	int num;
 
+	int num=0, tem=0;
+	int arr[6];
+	int count=0;
 	for (int a = 100; a <= 999; a++) {
 		for (int b = 100; b <= 999; b++) {
-			num = a * b;
-			
+			tem = a * b;
+			for (count = 0; 0 < tem; count++) {
+				arr[count] = tem % 10;
+				tem /= 10;
+			}
+			if (count % 2 == 1) {
+				if (arr[0] == arr[4] && arr[1] == arr[3]) {
+					tem = arr[0] + arr[1] * 10 + arr[2] * 100 + arr[3] * 1000 + arr[4] * 10000;
+					if (num < tem)
+						num = tem;
+				}
+			}
+			else {
+				if (arr[0] == arr[5] && arr[1] == arr[4] && arr[2] == arr[3]) {
+					tem = arr[0] + arr[1] * 10 + arr[2] * 100 + arr[3] * 1000 + arr[4] * 10000 + arr[5] * 100000;
+					if (num < tem)
+						num = tem;
+					printf("%d\n", num);
+				}
+			}
 		}
 	}
+	printf("%d", num);
+
+
 }
